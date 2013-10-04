@@ -1,0 +1,43 @@
+#####################
+# CentOS
+- include: centos.yml
+  when: ansible_distribution == 'CentOS'
+
+#####################
+# Ubuntu
+- include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+#####################
+# Debian
+- include: debian.yml
+  when: ansible_distribution == 'Debian'
+
+- name: Copy the configuration file for ZooKeeper
+  template: src=zoo.cfg dest=/etc/zookeeper/conf/zoo.cfg
+  notify: Restart ZooKeeper
+  tags:
+    - zookeeper
+    - files
+    - configs
+
+- name: Initialize ZooKeeper
+  template: >
+    src=myid
+    dest=/var/lib/zookeeper/myid
+    owner=zookeeper
+    group=zookeeper
+  tags:
+    - zookeeper
+    - configs
+
+- name: Ensure /var/log/zookeeper is present
+  file: >
+    path=/var/log/zookeeper
+    state=directory
+  tags:
+    - zookeepers
+    - files
+
+- name: Make sure ZooKeeper is running
+  service: name=zookeeper-server state=running enabled=yes runlevel=5

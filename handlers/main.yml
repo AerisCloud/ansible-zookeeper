@@ -1,0 +1,4 @@
+- name: Restart ZooKeeper
+  service: name=zookeeper-server state=restarted
+  tags:
+    - zookeeper
