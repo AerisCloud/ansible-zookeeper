@@ -20,15 +20,15 @@ Configuration
 
 ```ini
 [zookeeper:children]
-zookeeper-1
+zookeeper1
 
-[zookeeper-1]
-node-1.zookeeper-1.dev  ansible_ssh_host=172.16.0.101 zoo_id=1
-node-2.zookeeper-1.dev  ansible_ssh_host=172.16.0.102 zoo_id=2
-node-3.zookeeper-1.dev  ansible_ssh_host=172.16.0.103 zoo_id=3
+[zookeeper1]
+node1.zookeeper1.dev  ansible_ssh_host=172.16.0.101 zoo_id=1
+node2.zookeeper1.dev  ansible_ssh_host=172.16.0.102 zoo_id=2
+node3.zookeeper1.dev  ansible_ssh_host=172.16.0.103 zoo_id=3
 
-[zookeeper-1:vars]
-cluster_name = zookeeper-1 # Must be set to the name of the subgroup
+[zookeeper1:vars]
+cluster_name = zookeeper1 # Must be set to the name of the subgroup
 zookeeper_client_port=2181 # optional
 zookeeper_leader_port=2888 # optional
 zookeeper_election_port=3888 # optional
