@@ -29,7 +29,6 @@ node-3.zookeeper-1.dev  ansible_ssh_host=172.16.0.103 zoo_id=3
 
 [zookeeper-1:vars]
 cluster_name = zookeeper-1 # Must be set to the name of the subgroup
-internal_interface=eth1
 zookeeper_client_port=2181 # optional
 zookeeper_leader_port=2888 # optional
 zookeeper_election_port=3888 # optional
@@ -52,6 +51,9 @@ zookeeper_election_port=3888 # optional
 
 Execution
 ----------
+
+For any bootstrap or addition of node to the cluster, you must run
+the playbook on the full cluster.
 
 ```bash
 ansible-playbook game.yml -vvv -i inventory/development --limit="zookeeper-1"
