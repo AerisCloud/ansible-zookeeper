@@ -14,7 +14,7 @@
   when: ansible_distribution == 'Debian'
 
 - name: Copy the configuration file for ZooKeeper
-  template: src=zoo.cfg dest=/etc/zookeeper/conf/zoo.cfg
+  template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
   notify: Restart ZooKeeper
   tags:
     - zookeeper
@@ -23,7 +23,7 @@
 
 - name: Initialize ZooKeeper
   template: >
-    src=myid
+    src=myid.j2
     dest=/var/lib/zookeeper/myid
     owner=zookeeper
     group=zookeeper
