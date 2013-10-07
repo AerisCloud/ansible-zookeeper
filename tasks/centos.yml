@@ -46,23 +46,9 @@
 #
 # End fix
 #
-- name: Make sure required iptables ports are open
-  lineinfile: >
-    dest=/etc/sysconfig/iptables
-    state=present
-    regexp='--dport {{ item }} -j ACCEPT'
-    insertbefore='-m tcp --dport 22 -j ACCEPT'
-    line='-A INPUT -m state --state NEW -m tcp -p tcp --dport {{ item }} -j ACCEPT'
-  with_items:
-   - $zookeeper_client_port
-   - $zookeeper_leader_port
-   - $zookeeper_election_port
-  tags:
-    - zookeeper
-    - firewall
-
-- name: Reload iptables
-  command: /etc/init.d/iptables restart
+- name: Add the zookeeper firewall rules file
+  template: src=iptables.j2 dest=/etc/sysconfig/iptables mode=0600 backup=no
+            owner=root group=root
   tags:
     - zookeeper
     - firewall

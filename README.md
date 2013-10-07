@@ -10,7 +10,7 @@ following applications:
 * MAGE games
 * Elasticsearch clusters
 
-It is possible to start one than one cluster of nodes in a single datacenter,
+It is possible to start more than one cluster of nodes in a single datacenter,
 but it is unlikely to be required for our typical use cases.
 
 Configuration
@@ -29,9 +29,9 @@ node3.zookeeper1.dev  ansible_ssh_host=172.16.0.103 zoo_id=3
 
 [zookeeper1:vars]
 cluster_name = zookeeper1 # Must be set to the name of the subgroup
-zookeeper_client_port=2181 # optional
-zookeeper_leader_port=2888 # optional
-zookeeper_election_port=3888 # optional
+zookeeper_client_port = 2181 # optional
+zookeeper_leader_port = 2888 # optional
+zookeeper_election_port = 3888 # optional
 ```
 
 ### Task configuration example
