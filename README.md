@@ -56,7 +56,7 @@ For any bootstrap or addition of node to the cluster, you must run
 the playbook on the full cluster.
 
 ```bash
-ansible-playbook game.yml -vvv -i inventory/development --limit="zookeeper-1"
+ansible-playbook game.yml -vvv -i inventory/development --limit="zookeeper1"
 ```
 
 See also
