@@ -41,3 +41,14 @@
 
 - name: Make sure ZooKeeper is running
   service: name=zookeeper-server state=running enabled=yes runlevel=5
+
+- name: Add the zookeeper firewall rules file
+  template: >
+    src=iptables-zookeeper.j2
+    dest=/etc/iptables.d/zookeeper
+    mode=0600
+    backup=no
+    owner=root
+    group=root
+  tags:
+    - firewall
