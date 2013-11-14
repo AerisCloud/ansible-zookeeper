@@ -9,9 +9,7 @@ following applications:
 
 * MAGE games
 * Elasticsearch clusters
-
-It is possible to start more than one cluster of nodes in a single datacenter,
-but it is unlikely to be required for our typical use cases.
+* Anything running on Hadoop
 
 Configuration
 --------------
@@ -20,15 +18,18 @@ Configuration
 
 ```ini
 [zookeeper:children]
-zookeeper1
+zookeeper-somedc-prod
 
-[zookeeper1]
-node1.zookeeper1  ansible_ssh_host=172.16.0.101 zoo_id=1
-node2.zookeeper1  ansible_ssh_host=172.16.0.102 zoo_id=2
-node3.zookeeper1  ansible_ssh_host=172.16.0.103 zoo_id=3
+[zookeeper-somedc-prod:children]
+zookeeper1-somedc-prod
 
-[zookeeper1:vars]
-cluster_name = zookeeper1 # Must be set to the name of the subgroup
+[zookeeper1-somedc-prod]
+node1.zookeeper.somedc.prod1  ansible_ssh_host=172.16.0.101 zoo_id=1
+node2.zookeeper.somedc.prod1  ansible_ssh_host=172.16.0.102 zoo_id=2
+node3.zookeeper.somedc.prod1  ansible_ssh_host=172.16.0.103 zoo_id=3
+
+[zookeeper1-somedc-prod:vars]
+cluster_name = zookeeper1-somedc-prod # Must be set to the name of the subgroup
 zookeeper_client_port = 2181 # optional
 zookeeper_leader_port = 2888 # optional
 zookeeper_election_port = 3888 # optional
@@ -45,7 +46,9 @@ zookeeper_election_port = 3888 # optional
   accelerate: '{{ accelerated }}'   # if set to true, ensure accelerate_port is firewalled
   accelerate_port: 9210             # Note: always protect this port from outsiders
   roles:
+    - network
     - common
+    - collectd
     - zookeeper
 ```
 
@@ -53,10 +56,10 @@ Execution
 ----------
 
 For any bootstrap or addition of node to the cluster, you must run
-the playbook on the full cluster.
+the same deploy playbook on the full cluster.
 
 ```bash
-ansible-playbook game.yml -vvv -i inventory/development --limit="zookeeper1"
+gameinfra deploy production production/mygame/somedc --limit="*.zookeeper1.*"
 ```
 
 See also
