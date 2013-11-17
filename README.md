@@ -29,7 +29,7 @@ node2.zookeeper.somedc.prod1  ansible_ssh_host=172.16.0.102 zoo_id=2
 node3.zookeeper.somedc.prod1  ansible_ssh_host=172.16.0.103 zoo_id=3
 
 [zookeeper1-somedc-prod:vars]
-cluster_name = zookeeper1-somedc-prod # Must be set to the name of the subgroup
+zookeeper_cluster_name = zookeeper1-somedc-prod # Must be set to the name of the subgroup
 zookeeper_client_port = 2181 # optional
 zookeeper_leader_port = 2888 # optional
 zookeeper_election_port = 3888 # optional
