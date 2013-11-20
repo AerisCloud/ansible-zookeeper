@@ -59,7 +59,7 @@ For any bootstrap or addition of node to the cluster, you must run
 the same deploy playbook on the full cluster.
 
 ```bash
-gameinfra deploy production production/mygame/somedc --limit="*.zookeeper1.*"
+aeriscloud provision production production/mygame/somedc --limit="*.zookeeper1.*"
 ```
 
 See also
