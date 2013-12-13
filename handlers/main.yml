@@ -2,3 +2,10 @@
   service: name=zookeeper-server state=restarted
   tags:
     - zookeeper
+
+- name: Restart rsyslogd
+  service: >
+    name=rsyslog
+    state=restarted
+  tags:
+    - rsyslogd
