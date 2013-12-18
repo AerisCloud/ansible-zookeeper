@@ -26,7 +26,6 @@
     src=myid.j2
     dest=/var/lib/zookeeper/myid
     owner=zookeeper
-    group=zookeeper
   tags:
     - zookeeper
     - configs

@@ -26,22 +26,10 @@
 # to how they create users and groups. This
 # below will ensure sanity
 #
-- name: Ensure the zookeeper exists
-  group: >
-    name=zookeeper
-    group=hadoop
-    gid=498
-    state=present
-  tags:
-    - zookeeper
-    - pkgs
-
 - name: Ensure the zookeeper users default group is the zookeeper group
   user: >
     name=zookeeper
-    uid=498
     createhome=no
-    group=zookeeper
     state=present
   tags:
     - zookeeper
