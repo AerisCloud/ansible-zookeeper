@@ -29,6 +29,7 @@
 - name: Ensure the zookeeper exists
   group: >
     name=zookeeper
+    group=hadoop
     gid=498
     state=present
   tags:
