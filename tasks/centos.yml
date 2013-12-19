@@ -20,3 +20,12 @@
   tags:
     - zookeeper
     - pkgs
+
+- name: "Make sure the zookeeper group exists"
+  group: >
+    name=zookeeper
+    state=present
+    system=yes
+  tags:
+    - zookeeper
+    - users

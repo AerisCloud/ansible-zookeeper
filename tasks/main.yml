@@ -39,7 +39,14 @@
     - files
 
 - name: Make sure ZooKeeper is running
-  service: name=zookeeper-server state=running enabled=yes runlevel=5
+  service: >
+    name=zookeeper-server
+    state=running
+    enabled=yes
+    runlevel=5
+  tags:
+    - zookeeper
+    - services
 
 - name: Add the zookeeper firewall rules file
   template: >
