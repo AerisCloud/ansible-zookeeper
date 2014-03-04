@@ -59,6 +59,15 @@
   tags:
     - firewall
 
+- name: "Apply the zookeeper firewall rules right now"
+  shell: >
+    /sbin/iptables-restore \
+      -v \
+      --noflush < /etc/iptables.d/zookeeper
+  tags:
+    - zookeeper
+    - firewall
+
 - name: Install rsyslog config
   template: >
     src=rsyslog.conf.j2
