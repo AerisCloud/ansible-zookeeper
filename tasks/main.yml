@@ -13,6 +13,26 @@
 - include: debian.yml
   when: ansible_distribution == 'Debian'
 
+- name: Add the zookeeper firewall rules file
+  template: >
+    src=iptables-zookeeper.j2
+    dest=/etc/iptables.d/zookeeper
+    mode=0600
+    backup=no
+    owner=root
+    group=root
+  tags:
+    - firewall
+
+- name: "Apply the zookeeper firewall rules right now"
+  shell: >
+    /sbin/iptables-restore \
+      -v \
+      --noflush < /etc/iptables.d/zookeeper
+  tags:
+    - zookeeper
+    - firewall
+
 - name: Copy the configuration file for ZooKeeper
   template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
   notify: Restart ZooKeeper
@@ -47,26 +67,6 @@
   tags:
     - zookeeper
     - services
-
-- name: Add the zookeeper firewall rules file
-  template: >
-    src=iptables-zookeeper.j2
-    dest=/etc/iptables.d/zookeeper
-    mode=0600
-    backup=no
-    owner=root
-    group=root
-  tags:
-    - firewall
-
-- name: "Apply the zookeeper firewall rules right now"
-  shell: >
-    /sbin/iptables-restore \
-      -v \
-      --noflush < /etc/iptables.d/zookeeper
-  tags:
-    - zookeeper
-    - firewall
 
 - name: Install rsyslog config
   template: >
