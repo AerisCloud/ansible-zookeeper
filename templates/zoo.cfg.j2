@@ -5,7 +5,7 @@ initLimit=5
 syncLimit=2
 {% for host in groups[zookeeper_cluster_name] %}
 # Host {{ host }}
-server.{{ hostvars[host].zoo_id }}={{ hostvars[host]['ansible_' + private_interface]['ipv4']['address'] }}:{{ zookeeper_leader_port|default('2888') }}:{{ zookeeper_election_port|default('3888') }}
+server.{{ hostvars[host].zoo_id }}={{ hostvars[host]['ansible_ssh_host'] }}:{{ zookeeper_leader_port|default('2888') }}:{{ zookeeper_election_port|default('3888') }}
 {% endfor %}
 
 zookeeper.root.logger=INFO, CONSOLE
