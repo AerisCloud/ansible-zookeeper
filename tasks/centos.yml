@@ -13,7 +13,10 @@
     - repos
 
 - name: "Install Java and ZooKeeper"
-  yum: name={{ item }} state=present enablerepo=HDP-1.3.0.0
+  yum: >
+    name={{ item }}
+    state=present
+    enablerepo=HDP-1.3.0.0
   with_items:
     - java-1.7.0-openjdk
     - zookeeper-server
