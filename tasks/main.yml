@@ -13,7 +13,7 @@
 - include: debian.yml
   when: ansible_distribution == 'Debian'
 
-- name: Add the zookeeper firewall rules file
+- name: "Add the zookeeper firewall rules file"
   template: >
     src=iptables-zookeeper.j2
     dest=/etc/iptables.d/zookeeper
@@ -22,6 +22,7 @@
     owner=root
     group=root
   tags:
+    - zookeeper
     - firewall
 
 - name: "Apply the zookeeper firewall rules right now"
@@ -33,7 +34,7 @@
     - zookeeper
     - firewall
 
-- name: Copy the configuration file for ZooKeeper
+- name: "Copy the configuration file for ZooKeeper"
   template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
   notify: Restart ZooKeeper
   tags:
@@ -41,7 +42,7 @@
     - files
     - configs
 
-- name: Initialize ZooKeeper
+- name: "Initialize ZooKeeper"
   template: >
     src=myid.j2
     dest=/var/lib/zookeeper/myid
@@ -50,15 +51,15 @@
     - zookeeper
     - configs
 
-- name: Ensure /var/log/zookeeper is present
+- name: "Ensure /var/log/zookeeper is present"
   file: >
     path=/var/log/zookeeper
     state=directory
   tags:
-    - zookeepers
+    - zookeeper
     - files
 
-- name: Make sure ZooKeeper is running
+- name: "Make sure ZooKeeper is running"
   service: >
     name=zookeeper-server
     state=running
@@ -68,7 +69,7 @@
     - zookeeper
     - services
 
-- name: Install rsyslog config
+- name: "Install rsyslog config"
   template: >
     src=rsyslog.conf.j2
     dest=/etc/rsyslog.d/zookeeper.conf

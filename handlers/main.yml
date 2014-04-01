@@ -1,11 +1,12 @@
-- name: Restart ZooKeeper
+- name: "Restart ZooKeeper"
   service: name=zookeeper-server state=restarted
   tags:
     - zookeeper
 
-- name: Restart rsyslogd
+- name: "Restart rsyslogd"
   service: >
     name=rsyslog
     state=restarted
   tags:
+    - zookeeper
     - rsyslogd
