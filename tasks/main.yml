@@ -24,6 +24,7 @@
   tags:
     - zookeeper
     - firewall
+    - files
 
 - name: "Apply the zookeeper firewall rules right now"
   shell: |
@@ -52,6 +53,7 @@
   tags:
     - zookeeper
     - configs
+    - files
 
 - name: "Ensure /var/log/zookeeper is present"
   file: >
@@ -84,3 +86,4 @@
   tags:
     - zookeeper
     - rsyslogd
+    - files

@@ -11,6 +11,7 @@
   tags:
     - zookeeper
     - repos
+    - files
 
 - name: "Install Java and ZooKeeper"
   yum: >
