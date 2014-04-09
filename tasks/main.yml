@@ -28,9 +28,7 @@
 
 - name: "Apply the zookeeper firewall rules right now"
   shell: |
-    /sbin/iptables-restore \
-      -v \
-      --noflush < /etc/iptables.d/zookeeper
+    /sbin/iptables-restore -v --noflush < /etc/iptables.d/zookeeper
   tags:
     - zookeeper
     - firewall
