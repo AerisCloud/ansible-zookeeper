@@ -1,6 +1,6 @@
 - name: "Restart ZooKeeper"
   service: >
-    name=zookeeper-server
+    name={{ zookeeper_initd_script }}
     state=restarted
   tags:
     - zookeeper

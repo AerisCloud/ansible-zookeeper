@@ -1,0 +1,7 @@
+#!/bin/sh
+
+export ZOOKEEPER_HOME=${ZOOKEEPER_CONF:-/usr/lib/zookeeper}
+export ZOOKEEPER_CONF=${ZOOKEEPER_CONF:-/etc/zookeeper/conf}
+export CLASSPATH=$CLASSPATH:$ZOOKEEPER_CONF:$ZOOKEEPER_HOME/*:$ZOOKEEPER_HOME/lib/*
+export ZOOCFGDIR=${ZOOCFGDIR:-$ZOOKEEPER_CONF}
+env CLASSPATH=$CLASSPATH /usr/share/zookeeper/bin/zkCli.sh "$@"

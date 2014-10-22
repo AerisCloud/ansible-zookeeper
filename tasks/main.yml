@@ -37,6 +37,9 @@
   template: >
     src=zoo.cfg.j2
     dest=/etc/zookeeper/conf/zoo.cfg
+    mode=640
+    owner=root
+    group=zookeeper
   notify: Restart ZooKeeper
   tags:
     - zookeeper
@@ -63,7 +66,7 @@
 
 - name: "Make sure ZooKeeper is running"
   service: >
-    name=zookeeper-server
+    name={{ zookeeper_initd_script }}
     state=running
     enabled=yes
     runlevel=5
