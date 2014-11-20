@@ -13,6 +13,24 @@
 - include: debian.yml
   when: ansible_distribution == 'Debian'
 
+- name: "Make sure the zookeeper group exists"
+  group: >
+    name=zookeeper
+    state=present
+    system=yes
+  tags:
+    - zookeeper
+    - users
+
+- name: "Make sure that the zookeeper user is in the zookeeper group"
+  user: >
+    name=zookeeper
+    groups=zookeeper
+    append=yes
+  tags:
+    - zookeeper
+    - users
+
 - name: "Add the zookeeper firewall rules file"
   template: >
     src=iptables-zookeeper.j2

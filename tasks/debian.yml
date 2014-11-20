@@ -11,15 +11,6 @@
     - zookeeper
     - pkgs
 
-- name: "Make sure the zookeeper group exists"
-  group: >
-    name=zookeeper
-    state=present
-    system=yes
-  tags:
-    - zookeeper
-    - users
-
 - name: "Set /etc/init.d script name to zookeeper"
   set_fact:
     zookeeper_initd_script=zookeeper
