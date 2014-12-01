@@ -43,8 +43,6 @@ zookeeper_election_port = 3888 # optional
   gather_facts: true
   sudo: true
   user: '{{ user }}'
-  accelerate: '{{ accelerated }}'   # if set to true, ensure accelerate_port is firewalled
-  accelerate_port: 9210             # Note: always protect this port from outsiders
   roles:
     - network
     - common
