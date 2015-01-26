@@ -1,18 +1,3 @@
-- name: "Ensure Hortonworks repositories are present"
-  copy: >
-    src={{ item }}
-    dest=/etc/yum.repos.d/{{ item }}
-    owner=root
-    group=root
-    mode=0644
-  with_items:
-    - hdp.repo
-    - ambari.repo
-  tags:
-    - zookeeper
-    - repos
-    - files
-
 - name: "Install Java and ZooKeeper"
   yum2: >
     name={{ item }}

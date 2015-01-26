@@ -1,0 +1,7 @@
+dependencies:
+  - role: repo
+    repositories:
+      centos6:
+        - hortonworks
+      centos7:
+        - hortonworks
