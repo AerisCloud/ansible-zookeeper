@@ -1,5 +1,5 @@
 dependencies:
-  - role: repo
+  - role: repos
     repositories:
       centos6:
         - hortonworks
