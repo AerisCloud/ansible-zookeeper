@@ -16,7 +16,7 @@ galaxy_info:
     - database
     - database:nosql
 dependencies:
-  - role: repos
+  - role: aeriscloud-repos
     repositories:
       centos6:
         - hortonworks
