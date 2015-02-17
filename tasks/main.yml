@@ -106,3 +106,13 @@
     - zookeeper
     - rsyslogd
     - files
+
+- name: "Add AerisCloud service definition"
+  aeriscloud_service:
+    name: zookeeper
+    services:
+      - name: Zookeeper
+        port: 2181
+  tags:
+    - zookeeper
+    - announce
