@@ -31,26 +31,6 @@
     - zookeeper
     - users
 
-- name: "Add the zookeeper firewall rules file"
-  template: >
-    src=iptables-zookeeper.j2
-    dest=/etc/iptables.d/zookeeper
-    mode=0600
-    backup=no
-    owner=root
-    group=root
-  tags:
-    - zookeeper
-    - firewall
-    - files
-
-- name: "Apply the zookeeper firewall rules right now"
-  shell: |
-    /sbin/iptables-restore -v --noflush < /etc/iptables.d/zookeeper
-  tags:
-    - zookeeper
-    - firewall
-
 - name: "Copy the configuration file for ZooKeeper"
   template: >
     src=zoo.cfg.j2

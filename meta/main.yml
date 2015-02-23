@@ -26,3 +26,7 @@ dependencies:
     service_name: zookeeper
     tags:
       - zookeeper
+  - role: firewall
+    service_name: zookeeper
+    tags:
+      - zookeeper
