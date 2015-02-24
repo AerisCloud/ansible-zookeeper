@@ -30,3 +30,4 @@ dependencies:
     service_name: zookeeper
     tags:
       - zookeeper
+  - role: aeriscloud-yum

@@ -1,5 +1,5 @@
 - name: "Install Java and ZooKeeper"
-  yum2: >
+  yum: >
     name={{ item }}
     state=present
     enablerepo=HDP-1.3.0.0
