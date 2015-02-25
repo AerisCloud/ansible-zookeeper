@@ -22,7 +22,7 @@ dependencies:
         - hortonworks
       centos7:
         - hortonworks
-  - role: aeriscloud-rsyslog
+  - role: aeriscloud.rsyslog
     service_name: zookeeper
     tags:
       - zookeeper
@@ -30,4 +30,4 @@ dependencies:
     service_name: zookeeper
     tags:
       - zookeeper
-  - role: aeriscloud-yum
+  - role: aeriscloud.yum
