@@ -3,7 +3,7 @@ ZooKeeper role
 
 This role automates the maintenance of a ZooKeeper cluster.
 
-In the context of the softwares we use, this could currently be
+In the context of the software we use, this could currently be
 leveraged as an alternative to either multicast or avahi/mDNS by the
 following applications:
 
