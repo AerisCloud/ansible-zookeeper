@@ -1,0 +1,6 @@
+# Firewall rules for the 'zookeeper' role
+*filter
+:zookeeper_in - [0:0]
+-I INPUT -j zookeeper_in
+-A zookeeper_in -p tcp -m tcp -m multiport --dports {{ zookeeper_client_port }},{{ zookeeper_leader_port }},{{ zookeeper_election_port }} -j ACCEPT -i {{ private_interface }} -s {{ private_network }}/{{ private_netmask }}
+COMMIT
