@@ -27,7 +27,7 @@ dependencies:
     tags:
       - zookeeper
   - role: firewall
-    service_name: zookeeper
+    role_name: zookeeper
     tags:
       - zookeeper
   - role: aeriscloud.yum
