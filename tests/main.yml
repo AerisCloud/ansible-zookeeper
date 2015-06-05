@@ -1,0 +1,43 @@
+---
+name: "Zookeeper Cluster"
+containers:
+  zookeeper1:
+    image: 'centos:6'
+    vars:
+      zoo_id: 1
+  zookeeper2:
+    image: 'centos:7'
+    vars:
+      zoo_id: 2
+  zookeeper3:
+    image: 'debian:wheezy'
+    vars:
+      zoo_id: 3
+groups:
+  zookeeper:
+  - zookeeper1
+  - zookeeper2
+  - zookeeper3
+playbook:
+- hosts: all
+  sudo: true
+  roles:
+  - role: "@ROLE_NAME@"
+    zookeeper_cluster_name: zookeeper
+  tasks:
+  - name: 'Install zookeepercli'
+    get_url: url=https://github.com/outbrain/zookeepercli/releases/download/v1.0.7/zookeepercli dest=/usr/bin/zookeepercli mode=0755
+  - name: 'Set facts for zookeepercli'
+    set_fact:
+      zk_servers: "{{ hostvars.zookeeper1.ansible_ssh_host }},{{ hostvars.zookeeper2.ansible_ssh_host }},{{ hostvars.zookeeper3.ansible_ssh_host }}"
+  - name: 'Create a /foo entry from zookeeper1'
+    shell: zookeepercli --servers "{{ zk_servers }}" -c create /foo "bar"
+    when: zoo_id == 1
+  - name: 'Check from zookeeper2 that /foo exists and has the proper value'
+    shell: test "$( zookeepercli --servers "{{ zk_servers }}" -c get /foo )" == "bar"
+    when: zoo_id == 2
+  - name: 'Delete /foo from zookeeper3'
+    shell: zookeepercli --servers "{{ zk_servers }}" -c delete /foo
+    when: zoo_id == 3
+  - name: 'Check that /foo was deleted'
+    shell: test -z "$( ./zookeepercli --servers "{{ zk_servers }}" -c get /foo 2>/dev/null )"
