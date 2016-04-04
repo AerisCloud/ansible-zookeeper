@@ -6,6 +6,20 @@
   with_items:
     - java-1.8.0-openjdk
     - zookeeper-server
+  when: ansible_distribution_major_version|int <= 6
+  tags:
+    - zookeeper
+    - pkgs
+
+- name: "Install Java and ZooKeeper"
+  yum: >
+    name={{ item }}
+    state=present
+    enablerepo=mesosphere
+  with_items:
+    - java-1.8.0-openjdk
+    - mesosphere-zookeeper
+  when: ansible_distribution_major_version|int >= 7
   tags:
     - zookeeper
     - pkgs
@@ -13,6 +27,15 @@
 - name: "Set /etc/init.d script name to zookeeper-server"
   set_fact:
       zookeeper_initd_script=zookeeper-server
+  when: ansible_distribution_major_version|int <= 6
+  tags:
+    - zookeeper
+    - services
+
+- name: "Set service name to zookeeper"
+  set_fact:
+    zookeeper_initd_script=zookeeper
+  when: ansible_distribution_major_version|int >= 7
   tags:
     - zookeeper
     - services
