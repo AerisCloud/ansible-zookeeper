@@ -16,10 +16,10 @@ galaxy_info:
     - database
     - database:nosql
 dependencies:
-  - role: aeriscloud.repos
+  - role: AerisCloud.repos
     repositories:
       centos6:
         - hortonworks
       centos7:
         - mesosphere
-  - role: aeriscloud.yum
+  - role: AerisCloud.yum
