@@ -26,6 +26,11 @@ node3.zookeeper.somedc.prod1  ansible_ssh_host=172.16.0.103 zoo_id=3
 [zookeeper1-somedc-prod:vars]
 # Must be set to the name of the subgroup
 zookeeper_cluster_name = zookeeper1-somedc-prod
+
+# Optional. Change the logging level.
+# For possible levels, see: http://logging.apache.org/log4j/1.2/manual.html#Logger_hierarchy
+# Default: "INFO,CONSOLE"
+zookeeper_log4j_prop = "WARN,CONSOLE"
 ```
 
 See also
