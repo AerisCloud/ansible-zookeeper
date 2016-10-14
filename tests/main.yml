@@ -10,7 +10,7 @@ containers:
     vars:
       zoo_id: 2
   zookeeper3:
-    image: 'debian:wheezy'
+    image: 'centos:7'
     vars:
       zoo_id: 3
 groups:
