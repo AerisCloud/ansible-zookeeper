@@ -39,3 +39,43 @@
   tags:
     - zookeeper
     - services
+
+- set_fact:
+    zookeeper_log4j_prop: "{{ zookeeper_log4j_prop|default('INFO,ROLLINGFILE') }}"
+  when: ansible_distribution_major_version|int <= 6
+  tags:
+    - zookeeper
+    - pkgs
+
+- set_fact:
+    zookeeper_log4j_prop: "{{ zookeeper_log4j_prop|default('INFO,CONSOLE') }}"
+  when: ansible_distribution_major_version|int >= 7
+  tags:
+    - zookeeper
+    - pkgs
+
+- name: "Set logging level (CentOS 6)"
+  lineinfile: >
+    dest=/usr/bin/zookeeper-server
+    regexp='{{ item.regex }}'
+    line='{{ item.line }}'
+  with_items:
+    - { regex: "^export ZOO_LOG4J_PROP=", line: "export ZOO_LOG4J_PROP={{ zookeeper_log4j_prop }}" }
+  when: ansible_distribution_major_version|int <= 6
+  notify: "Restart ZooKeeper"
+  tags:
+    - zookeeper
+    - pkgs
+
+- name: "Set logging level (CentOS 7)"
+  lineinfile: >
+    dest=/opt/mesosphere/zookeeper/bin/zkEnv.sh
+    regexp='{{ item.regex }}'
+    line='{{ item.line }}'
+  with_items:
+    - { regex: "^    ZOO_LOG4J_PROP=", line: "    ZOO_LOG4J_PROP={{ zookeeper_log4j_prop }}" }
+  when: ansible_distribution_major_version|int >= 7
+  notify: "Restart ZooKeeper"
+  tags:
+    - zookeeper
+    - pkgs

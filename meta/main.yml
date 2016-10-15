@@ -9,9 +9,6 @@ galaxy_info:
       versions:
         - 6
         - 7
-    - name: Debian
-      versions:
-        - wheezy
   categories:
     - database
     - database:nosql
